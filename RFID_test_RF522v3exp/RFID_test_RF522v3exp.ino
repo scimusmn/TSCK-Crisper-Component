@@ -8,7 +8,7 @@ uint8_t tag2_EEPROM_address = 8; //subsequent tag EEPROM address are offset by a
 #define greenLED 2
 #define redLED 3
 //
-#include <Wire.h>
+#include <Wire.h> //I2C
 #include <SPI.h>
 #include<EEPROM.h>
 #include <MFRC522.h>
@@ -21,6 +21,7 @@ String tagRead = "";
 String stored_UID[2] = {"", ""};
 bool storeUID = false;
 uint8_t addressOffset = 0;
+
 
 void setup() {
   pinMode(greenLED, OUTPUT);
@@ -69,7 +70,6 @@ void readTag() { //function to read tags and store UID into EEPROG if program mo
 
 
 void loop() {
-delay(60);
   readTag();
 
   //Conditionals
