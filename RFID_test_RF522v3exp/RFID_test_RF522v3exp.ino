@@ -33,11 +33,10 @@ void setup() {
   SPI.begin();      // Init SPI bus
   mfrc522.PCD_Init();   // Init MFRC522
   Serial.begin(9600);
-  
-  //***** Load stored UID values from EEPROM into stored_UID array*****
-  for (byte j = 0; j < number_of_tags; j++) { 
+  //Load stored UID values from EEPROM into stored_UID array
+  for (byte j = 0; j < number_of_tags; j++) {
     for (byte i = 0 + addressOffset; i < 4 + addressOffset; i++) {
-      if (EEPROM.read(i) < 0x10) stored_UID[j].concat("0"); //if current byte is <16 add a leading "0" to Hex value
+      if (EEPROM.read(i) < 0x10) stored_UID[j].concat("0"); //if current byte is <16 add a leading "0" to hex value
       stored_UID[j].concat(String(EEPROM.read(i), HEX));
       stored_UID[j].toUpperCase();
     }
@@ -48,6 +47,7 @@ void setup() {
     addressOffset = addressOffset + 8; //move to next tag address in EEPROM
   }
 }
+
 
 void readTag() { //function to read tags and store UID into EEPROG if program mode selected
   if (!mfrc522.PICC_IsNewCardPresent()) { //look presence of RFID tag
@@ -70,22 +70,19 @@ void readTag() { //function to read tags and store UID into EEPROG if program mo
 
 
 void loop() {
-  readTag();
-
-  //Conditionals
+  readTag(); //read tag function
+  //Conditionals to store tag UID to EEPROM
   if (!digitalRead(programSw1)) {
-    digitalWrite(greenLED, LOW);
-    digitalWrite(redLED, LOW);
     addressOffset = tag1_EEPROM_address;
     storeUID = true;
   }
   else if (!digitalRead(programSw2)) {
-    digitalWrite(greenLED, LOW);
-    digitalWrite(redLED, LOW);
     addressOffset = tag2_EEPROM_address;
     storeUID = true;
   }
- if (tagRead == stored_UID[0]) { //change here the UID of the card/cards that you want to give access
+
+  //Conditionals to turn on/off pinouts
+  if (tagRead == stored_UID[0]) {
     digitalWrite(greenLED, HIGH);
     digitalWrite(redLED, LOW);
     tagRead = "";
