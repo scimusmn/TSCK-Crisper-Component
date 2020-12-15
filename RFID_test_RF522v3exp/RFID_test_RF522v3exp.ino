@@ -35,8 +35,8 @@ void setup() {
   Serial.begin(9600);
   
   //***** Load stored UID values from EEPROM into stored_UID array*****
-  for (uint8_t j = 0; j < number_of_tags; j++) { 
-    for (uint8_t i = 0 + addressOffset; i < 4 + addressOffset; i++) {
+  for (byte j = 0; j < number_of_tags; j++) { 
+    for (byte i = 0 + addressOffset; i < 4 + addressOffset; i++) {
       if (EEPROM.read(i) < 0x10) stored_UID[j].concat("0"); //if current byte is <16 add a leading "0" to Hex value
       stored_UID[j].concat(String(EEPROM.read(i), HEX));
       stored_UID[j].toUpperCase();
@@ -56,7 +56,7 @@ void readTag() { //function to read tags and store UID into EEPROG if program mo
   if (!mfrc522.PICC_ReadCardSerial()) { //check for readable data on the RFID tag
     return;
   }
-  for (uint8_t i = 0; i < mfrc522.uid.size; i++) {
+  for (byte i = 0; i < mfrc522.uid.size; i++) {
     if (mfrc522.uid.uidByte[i] < 0x10) tagRead.concat("0");
     tagRead.concat(String(mfrc522.uid.uidByte[i], HEX)); //pad hex values <10 with a "0" for readability
     if (storeUID) EEPROM.write(i + addressOffset, mfrc522.uid.uidByte[i]); //write bytes to EEPROM if in programming mode
