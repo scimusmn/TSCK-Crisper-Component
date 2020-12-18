@@ -34,9 +34,10 @@ void setup() {
   pinMode(programSw2, INPUT_PULLUP);
   digitalWrite(greenLED, LOW);
   digitalWrite(redLED, LOW);
-  SPI.begin();      // Init SPI bus
-  mfrc522.PCD_Init();   // Init MFRC522
+  SPI.begin();  // init SPI bus
+  Wire.begin(); //init I2C
   Serial.begin(9600);
+  mfrc522.PCD_Init();   // Init MFRC522
   //Load stored UID values from EEPROM into stored_UID array
   for (byte j = 0; j < numberTags; j++) {
     for (byte i = 0 + addressOffset; i < 4 + addressOffset; i++) {
