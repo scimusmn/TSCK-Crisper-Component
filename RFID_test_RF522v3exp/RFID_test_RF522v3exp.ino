@@ -10,8 +10,8 @@
 #define programSw2 15  //pin for program mode to store tag #2 to EEPROM
 #define greenLED 2
 #define redLED 3
-#define rstPin 9
-#define ssPin 10
+#define rstPin 9 //card reader reset pin
+#define ssPin 10 //card reader serial data pin
 uint8_t numberTags = 2; //Number of UIDs to be stored in EEPROM
 uint8_t tag1EEPROMaddress = 0; //starting address is 0
 uint8_t tag2EEPROMaddress = 8; //subsequent tag EEPROM address are offset by another "8"
