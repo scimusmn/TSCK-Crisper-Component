@@ -20,11 +20,9 @@
 
 //variables
 String storedUID[2] = {"", ""};  //stored tag UID array
-
-//other variables, do not change
 String tagRead = "";
 bool storeUID = false;
-uint8_t addressOffset = 0;
+uint8_t addressOffset = 0; //EEPROM byte address offset, each tag UID uses 4 bytes
 
 //class instances
 MFRC522 mfrc522(ssPin, rstPin);  //Create MFRC522 instance
@@ -53,7 +51,7 @@ void setup() {
     Serial.print(addressOffset);
     Serial.print(": ");
     Serial.println(storedUID[j]);
-    addressOffset += 8; //shift to next 8 bytes in EEPROM to read or write next tag UID
+    addressOffset += 4; //shift to next 4 bytes in EEPROM to read or write next tag UID
   }
 }
 
@@ -89,7 +87,7 @@ void loop() {
     storeUID = true;
   }
   else if (!digitalRead(tag2ProgramSwitch) && digitalRead(tag1ProgramSwitch)) {
-    addressOffset = 8; //store tag #2 UID starting at 8th byte (address 8) in EEPROM
+    addressOffset = 4; //store tag #2 UID starting at 8th byte (address 8) in EEPROM
     storeUID = true;
   }
 
