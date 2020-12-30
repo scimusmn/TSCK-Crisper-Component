@@ -2,7 +2,7 @@
   This code is a proof of concept test for the TSCK crisper component. The purpose
   of this test is to detect valid combinations of RFID tag UIDS, and color spots,
   and upon finding a valid combination, send a message via SerialController indicating 
-  the combiation name and its value as being true, or "1".
+  the combination name and its value as being true, or "1".
  
   This test uses an MFRC522 RFID card reader to read MIFARE 1K classic RIFD tag UIDs
   with the option to store the UIDs into EEPROM on the Arduino.  To sense the color spots,
