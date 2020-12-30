@@ -10,8 +10,8 @@
  
   This test uses an MFRC522 RFID card reader to read MIFARE 1K classic RIFD tag UIDs
   with the option to store the UIDs into the MCU's EEPROM.  To sense the color spots,
-  an Adafruit TSC34725 color sensor is used. The read tag RFIDs are checked against the
-  tag UIDs that are stored in EEPROM on the Arduino.
+  an Adafruit TSC34725 color sensor is used.  When an RFID tag is sensed, it is checked 
+  against the tag UIDs that are stored in EEPROM on the Arduino.
   
   To store a tag UID into EEPROM, an input pin assigned to a specific EEPROM address must be set "LOW".
   The next tag that is scanned after the input pin is set "LOW" will have its UID
