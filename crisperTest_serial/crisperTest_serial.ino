@@ -30,8 +30,6 @@
 //definitions
 #define rstPin 9 //card reader reset pin
 #define ssPin 10 //card reader serial data pin
-#define greenLED 2
-#define redLED 3
 #define tag1ProgramSwitch 14  //pin for program mode to store tag #1 to EEPROM
 #define tag2ProgramSwitch 15  //pin for program mode to store tag #2 to EEPROM
 #define baudrate 115200 //baudrate for serial com
